@@ -49,7 +49,7 @@ beautiful.init("~/.config/awesome/theme/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "alacritty"
-editor = os.getenv("EDITOR") or "nano"
+editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
@@ -175,11 +175,11 @@ awful.screen.connect_for_each_screen(function(s)
     }
 
     -- Create a tasklist widget
-    -- s.mytasklist = awful.widget.tasklist {
-    --     screen  = s,
-    --     filter  = awful.widget.tasklist.filter.currenttags,
-    --     buttons = tasklist_buttons
-    -- }
+    s.mytasklist = awful.widget.tasklist {
+        screen  = s,
+        filter  = awful.widget.tasklist.filter.currenttags,
+        buttons = tasklist_buttons
+    }
 
     -- Create the wibox
     s.mywibox = awful.wibar({ position = "top", screen = s })
@@ -189,9 +189,7 @@ awful.screen.connect_for_each_screen(function(s)
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
-            -- mylauncher,
             s.mytaglist,
-            -- s.mypromptbox,
         },
         s.mytasklist, -- Middle widget
         { -- Right widgets
