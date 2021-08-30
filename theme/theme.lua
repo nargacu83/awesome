@@ -27,7 +27,7 @@ theme.gap_single_client = false
 theme.useless_gap   = dpi(4)
 theme.border_width  = 2
 theme.border_normal = "#282a36"
-theme.border_focus  = "#f8f8f2"
+theme.border_focus  = "#bd93f9"
 theme.border_marked = "#ff5555"
 
 theme.notification_font = "sans 11"
