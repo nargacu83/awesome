@@ -420,7 +420,6 @@ awful.rules.rules = {
         },
         class = {
           "pavucontrol",
-          "pavucontrol",
           "origin.exe",
           "Arandr",
           "Blueman-manager",
