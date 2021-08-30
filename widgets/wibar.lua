@@ -19,7 +19,7 @@ local mytextclock = require("widgets.textclock")
 local right_widgets = {
     mysystray,
     mymemory,
-    mycpu,
+    -- mycpu,
     mybattery,
     mynetwork,
     mytextclock

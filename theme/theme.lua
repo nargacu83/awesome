@@ -4,12 +4,9 @@
 
 local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
-
-local themes_path = "~/.config/awesome/themes/"
-
 local theme = {}
 
-theme.font          = "monospace 10"
+theme.font          = "Cantarell Bold 10"
 
 -- theme.bg_normal     = "#232831"
 -- theme.bg_focus      = "#2d333f"
@@ -27,9 +24,8 @@ theme.fg_urgent     = "#ffffff"
 theme.fg_minimize   = "#ffffff"
 
 theme.gap_single_client = false
-theme.useless_gap   = dpi(5)
-theme.border_width  = 1
-theme.inner_border_width  = 2
+theme.useless_gap   = dpi(4)
+theme.border_width  = 2
 theme.border_normal = "#000000"
 theme.border_focus  = "#000000"
 theme.border_marked = "#91231c"
@@ -51,7 +47,7 @@ theme.notification_border_width = 2
 theme.menu_height = dpi(15)
 theme.menu_width  = dpi(100)
 
-theme.wallpaper = themes_path .. "default/background.png"
+theme.wallpaper = "~/.config/wallpaper/background.png"
 theme.icon_theme = nil
 
 return theme
