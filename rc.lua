@@ -1,3 +1,5 @@
+-- Original config by dmun: https://github.com/dmun/awesome
+
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
