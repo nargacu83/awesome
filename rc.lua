@@ -196,3 +196,6 @@ function change_client_state(state)
         client.focus.fullscreen = true
     end
 end
+
+--- Autostart
+awful.spawn.with_shell("~/.config/autostart/autostart.sh")
