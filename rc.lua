@@ -422,7 +422,6 @@ awful.rules.rules = {
           "pavucontrol",
           "pavucontrol",
           "origin.exe",
-
           "Arandr",
           "Blueman-manager",
           "Gpick",
