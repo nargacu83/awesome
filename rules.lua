@@ -57,7 +57,7 @@ M = {
 			"normal",
 			"dialog"
 		}
-	}, properties = { titlebars_enabled = true } },
+	}, properties = { titlebars_enabled = false } },
 }
 
 return M

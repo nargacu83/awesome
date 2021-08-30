@@ -10,18 +10,14 @@ local wibar_height = 35
 local mytaglist = require("widgets.taglist")
 local mysystray = require("widgets.systray")
 local mybattery = require("widgets.battery")
-local mynetwork = require("widgets.network")
 local mymemory = require("widgets.memory")
-local mycpu = require("widgets.cpu")
 local mytextclock = require("widgets.textclock")
 
 -- Activated widgets
 local right_widgets = {
     mysystray,
     mymemory,
-    -- mycpu,
     mybattery,
-    mynetwork,
     mytextclock
 }
 
@@ -31,7 +27,8 @@ function wibar.get(s)
     local mywibox = awful.wibar({
         position = "top",
         screen = s,
-        height = dpi(wibar_height)
+        height = dpi(wibar_height),
+        wibar_bg = "#000000"
     })
 
     local taglist = mytaglist.get(s)

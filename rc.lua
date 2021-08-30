@@ -24,9 +24,6 @@ local keys = require("keys")
 -- another config (This code will only ever execute for the fallback config)
 if awesome.startup_errors then
     awful.spawn("notify-send \"Oops, there were errors during startup!\" \"" .. awesome.startup_errors .."\"")
-    -- naughty.notify({ preset = naughty.config.presets.critical,
-    --                  title = "Oops, there were errors during startup!",
-    --                  text = awesome.startup_errors })
 end
 
 -- Handle runtime errors after startup
@@ -38,9 +35,7 @@ do
         in_error = true
         
         awful.spawn("notify-send \"Oops, an error happened!\" \"" .. tostring(err) .."\"")
-        -- naughty.notify({ preset = naughty.config.presets.critical,
-        --                  title = "Oops, an error happened!",
-        --                  text = tostring(err) })
+
         in_error = false
     end)
 end
@@ -141,37 +136,6 @@ client.connect_signal("manage", function (c)
         awful.placement.no_offscreen(c)
     end
 end)
-
--- Add a titlebar if titlebars_enabled is set to true in the rules.
--- client.connect_signal("request::titlebars", function(c)
--- 	local file = io.open(string.format("~/.config/awesome/client_colors.json", os.getenv("HOME")), "rb")
--- 	local client_color = {}
-
--- 	if file ~= nil then
--- 		client_color = json.decode(file:read("*all"))[c.class] or { focus = "#3c3c3c", normal = "#303030" }
--- 		file:close()
--- 	end
-
--- 	awful.titlebar(c, {
--- 			position = "top",
--- 			size = beautiful.inner_border_width,
--- 			bg_focus = client_color["focus_top"],
--- 			bg_normal = client_color["normal_top"],
--- 		}) : setup {
--- 		layout = wibox.layout.align.horizontal
--- 	}
-
--- 	for _,v in ipairs({ "right", "bottom", "left" }) do
--- 		awful.titlebar(c, {
--- 				position = v,
--- 				size = beautiful.inner_border_width,
--- 				bg_focus = client_color["focus"],
--- 				bg_normal = client_color["normal"],
--- 			}) : setup {
--- 			layout = wibox.layout.align.horizontal
--- 		}
--- 	end
--- end)
 
 -- Enable sloppy focus, so that focus follows mouse.
 -- client.connect_signal("mouse::enter", function(c)
