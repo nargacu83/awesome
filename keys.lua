@@ -21,12 +21,6 @@ M.globalkeys = gears.table.join(
 			end
 		end,
 	{ description = "restore minimized", group = "client" }),
-
-    -- Standard program
-    awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
-              {description = "open a terminal", group = "launcher"}),
-    awful.key({ modkey,           }, "p", function () awful.spawn("rofi -show drun") end,
-              {description = "open rofi in drun mode", group = "launcher"}),
     
     -- Awesome
     awful.key({ modkey, "Control" }, "r", awesome.restart,
