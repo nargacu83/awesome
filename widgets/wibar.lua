@@ -8,18 +8,11 @@ local wibar_height = 35
 
 -- Widget imports
 local mytaglist = require("widgets.taglist")
+local mytasklist = require("widgets.tasklist")
 local mysystray = require("widgets.systray")
 local mybattery = require("widgets.battery")
 local mymemory = require("widgets.memory")
 local mytextclock = require("widgets.textclock")
-
--- Activated widgets
-local right_widgets = {
-    mysystray,
-    mymemory,
-    mybattery,
-    mytextclock
-}
 
 local wibar = {}
 
@@ -31,41 +24,35 @@ function wibar.get(s)
     })
 
     local taglist = mytaglist.get(s)
-
-    -- TODO modular left widgets
+    local tasklist = mytasklist.get(s)
+    
     local left = {
         layout = wibox.layout.fixed.horizontal,
-        taglist
+        taglist,
+        tasklist
     }
 
     local right = {
         layout = wibox.layout.fixed.horizontal,
+        mysystray,
+        mymemory,
+        mybattery,
+        mytextclock
     }
-
-    for _,v in ipairs(right_widgets) do
-        right[#right+1] = ({
-            v,
-            left = widget_padding,
-            right = widget_padding,
-            widget = wibox.container.margin
-        })
-    end
 
     -- Add widgets to the wibox
     mywibox:setup {
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
             left,
-            -- left = 20,
             right = 10,
             widget = wibox.container.margin
         },
         { -- Middle widgets
-            layout = wibox.layout.align.horizontal,
+            layout = wibox.layout.align.horizontal
         },
         { -- Right widgets
             right,
-            right = 10,
             widget = wibox.container.margin
         }
     }

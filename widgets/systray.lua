@@ -6,7 +6,7 @@ local systray = {
     wibox.widget.systray(),
     top = dpi(6),
     bottom = dpi(6),
-    right = widget_padding,
+    right = dpi(6),
     widget = wibox.container.margin
 }
 
