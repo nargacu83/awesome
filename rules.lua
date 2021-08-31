@@ -76,6 +76,25 @@ M = {
 			"dialog"
 		}
 	}, properties = { titlebars_enabled = false } },
+
+	{ rule_any = {
+		class = {
+			"freetube"
+		}
+	}, properties = { screen = 1, tag = "1" } },
+	
+	{ rule_any = {
+		class = {
+			"vscodium", "jetbrains-rider", "unityhub", "Unity"
+		}
+	}, properties = { screen = 1, tag = "2" } },
+	
+	{ rule_any = {
+		class = {
+			"discord",
+			"element"
+		}
+	}, properties = { screen = 1, tag = "3" } },
 }
 
 return M
