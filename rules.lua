@@ -37,7 +37,24 @@ M = {
 			"Wpa_gui",
 			"veromix",
 			"xtightvncviewer",
-			"pavucontrol"
+			"pavucontrol",
+			"origin.exe",
+			"file_progress",
+			"confirm",
+			"dialog",
+			"download",
+			"error",
+			"notification",
+			"splash",
+			"toolbar",
+		
+		},
+		type = {
+			"utility",
+			"notification",
+			"toolbar",
+			"splash",
+			"dialog"
 		},
 
 		-- Note that the name property shown in xprop might be set slightly after creation of the client
