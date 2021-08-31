@@ -27,8 +27,7 @@ function wibar.get(s)
     local mywibox = awful.wibar({
         position = "top",
         screen = s,
-        height = dpi(wibar_height),
-        wibar_bg = "#000000"
+        height = dpi(wibar_height)
     })
 
     local taglist = mytaglist.get(s)

@@ -10,20 +10,20 @@ theme.font          = "Cantarell Bold 10"
 
 -- theme.bg_normal     = "#232831"
 -- theme.bg_focus      = "#2d333f"
-theme.bg_normal     = "#282a36"
-theme.bg_focus      = "#282a36"
-theme.bg_urgent     = "#282a36"
+theme.bg_normal     = "#000000"
+theme.bg_focus      = "#ff5555"
+theme.bg_urgent     = "#ff5555"
 theme.bg_minimize   = "#282a36"
 theme.bg_systray    = theme.bg_normal
-theme.systray_icon_spacing = 15
+theme.systray_icon_spacing = 2
 
 theme.fg_normal     = "#f8f8f2"
-theme.taglist_fg_empty = "#5B6268"
-theme.fg_focus      = "#f8f8f2"
+theme.taglist_fg_empty = "#282a36"
+theme.fg_focus      = "#ffffff"
 theme.fg_urgent     = "#f8f8f2"
 theme.fg_minimize   = "#f8f8f2"
 
-theme.gap_single_client = false
+theme.gap_single_client = true
 theme.useless_gap   = dpi(4)
 theme.border_width  = 2
 theme.border_normal = "#282a36"
