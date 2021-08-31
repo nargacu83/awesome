@@ -18,6 +18,7 @@ local wibar = require("widgets.wibar")
 local json = require("util.json")
 local keys = require("keys")
 
+-- Notify with dunst
 function notify(title, description)
     awful.spawn("notify-send \"" .. title .. "\" \"" .. description .."\"")
 end
@@ -43,6 +44,9 @@ do
     end)
 end
 -- }}}
+
+-- Set locale
+os.setlocale(os.getenv("LANG"))
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
