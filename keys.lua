@@ -8,8 +8,8 @@ modkey = "Mod4"
 
 -- {{{ Key bindings
 M.globalkeys = gears.table.join(
-	awful.key({ modkey, "Control"   }, "q", awesome.quit,
-              {description = "quit awesome", group = "awesome"}),
+	awful.key({ modkey,           }, "w", function () client.focus:kill() end,
+              {description = "close", group = "client"}),
 	awful.key({ modkey }, "r",
 		function ()
 			local c = awful.client.restore()
@@ -20,7 +20,25 @@ M.globalkeys = gears.table.join(
 				)
 			end
 		end,
-	{ description = "restore minimized", group = "client" })
+	{ description = "restore minimized", group = "client" }),
+
+    -- Standard program
+    awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
+              {description = "open a terminal", group = "launcher"}),
+    awful.key({ modkey,           }, "p", function () awful.spawn("rofi -show drun") end,
+              {description = "open rofi in drun mode", group = "launcher"}),
+    
+    -- Awesome
+    awful.key({ modkey, "Control" }, "r", awesome.restart,
+              {description = "reload awesome", group = "awesome"}),
+    awful.key({ modkey, "Control" }, "q", awesome.quit,
+              {description = "quit awesome", group = "awesome"}),
+    
+    -- Layout
+    awful.key({ modkey,           }, "Tab", function () awful.layout.inc(1) end,
+              {description = "select next", group = "layout"}),
+    awful.key({ modkey,           }, "f", awful.client.floating.toggle,
+              {description = "toggle floating", group = "client"})
 )
 
 -- Bind all key numbers to tags.
@@ -73,28 +91,31 @@ for i = 1, 9 do
     )
 end
 
-M.clientbuttons =
-    gears.table.join(
-    awful.button(
-        {},
-        1,
+M.clientbuttons = gears.table.join(
+    awful.button({}, 1,
         function(c)
             c:emit_signal("request::activate", "mouse_click", {raise = true})
         end
     ),
-    awful.button(
-        {modkey},
-        1,
+    awful.button({modkey}, 1,
         function(c)
             c:emit_signal("request::activate", "mouse_click", {raise = true})
+            -- Enable floating if it's not already
+            if not c.floating then
+                c.floating_geometry = nil
+                c.floating = true
+            end
             awful.mouse.client.move(c)
         end
     ),
-    awful.button(
-        {modkey},
-        3,
+    awful.button({modkey}, 3,
         function(c)
             c:emit_signal("request::activate", "mouse_click", {raise = true})
+            -- Enable floating if it's not already
+            if not c.floating then
+                c.floating_geometry = nil
+                c.floating = true
+            end
             awful.mouse.client.resize(c)
         end
     )

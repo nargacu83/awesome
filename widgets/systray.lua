@@ -4,8 +4,8 @@ local dpi = xresources.apply_dpi
 
 local systray = {
     wibox.widget.systray(),
-    top = dpi(1),
-    bottom = dpi(1),
+    top = dpi(6),
+    bottom = dpi(6),
     right = widget_padding,
     widget = wibox.container.margin
 }

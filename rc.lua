@@ -12,12 +12,15 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 
 -- Notification library
--- local naughty = require("naughty")
 local menubar = require("menubar")
 
 local wibar = require("widgets.wibar")
 local json = require("util.json")
 local keys = require("keys")
+
+function notify(title, description)
+    awful.spawn("notify-send \"" .. title .. "\" \"" .. description .."\"")
+end
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -59,26 +62,6 @@ awful.layout.layouts = {
 -- }}}
 
 -- {{{ Menu
--- Create a launcher widget and a main menu
-myawesomemenu = {
-   { "hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
-   { "manual", terminal .. " -e man awesome" },
-   { "edit config", editor_cmd .. " " .. awesome.conffile },
-   { "restart", awesome.restart },
-   { "quit", function() awesome.quit() end },
-}
-
-mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "open terminal", terminal }
-                                  }
-                        })
-
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
-                                     menu = mymainmenu })
-
-local menu_awesome = { "awesome", myawesomemenu, beautiful.awesome_icon }
-local menu_terminal = { "open terminal", terminal }
-
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
@@ -95,7 +78,6 @@ local function set_wallpaper(s)
             wallpaper = wallpaper(s)
         end
         gears.wallpaper.maximized(wallpaper, s, true)
-        -- gears.wallpaper.set("#131313")
     end
 end
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
@@ -110,14 +92,6 @@ awful.screen.connect_for_each_screen(function(s)
 
     wibar.get(s)
 end)
-
--- {{{ Mouse bindings
-root.buttons(gears.table.join(
-    awful.button({ }, 3, function () mymainmenu:toggle() end),
-    awful.button({ }, 4, awful.tag.viewnext),
-    awful.button({ }, 5, awful.tag.viewprev)
-))
--- }}}
 
 root.keys(keys.globalkeys)
 awful.rules.rules = require("rules")
@@ -142,6 +116,10 @@ end)
 --     c:emit_signal("request::activate", "mouse_enter", {raise = false})
 -- end)
 
+client.connect_signal("property::maximized", function (c)
+    c.border_width = c.maximized and 0 or beautiful.border_width
+end)
+
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus c:raise() end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
@@ -165,3 +143,10 @@ end
 
 --- Autostart
 awful.spawn.with_shell("~/.config/autostart/autostart.sh")
+
+-- Run garbage collector regularly to prevent memory leaks
+gears.timer {
+    timeout = 30,
+    autostart = true,
+    callback = function() collectgarbage() end
+}

@@ -3,7 +3,7 @@ local wibox = require("wibox")
 local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
 
-local widget_padding = 20
+local widget_padding = 8
 local wibar_height = 35
 
 -- Widget imports
