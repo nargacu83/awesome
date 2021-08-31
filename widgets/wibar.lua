@@ -13,6 +13,7 @@ local mysystray = require("widgets.systray")
 local mybattery = require("widgets.battery")
 local mymemory = require("widgets.memory")
 local mytextclock = require("widgets.textclock")
+local mytextclockhour = require("widgets.textclockhour")
 
 local wibar = {}
 
@@ -29,15 +30,17 @@ function wibar.get(s)
     local left = {
         layout = wibox.layout.fixed.horizontal,
         taglist,
-        tasklist
+        tasklist,
+        spacing = 10
     }
 
     local right = {
         layout = wibox.layout.fixed.horizontal,
         mysystray,
         mymemory,
-        mybattery,
-        mytextclock
+        mytextclock,
+        mytextclockhour,
+        spacing = 10
     }
 
     -- Add widgets to the wibox
@@ -45,7 +48,6 @@ function wibar.get(s)
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
             left,
-            right = 10,
             widget = wibox.container.margin
         },
         { -- Middle widgets
@@ -53,6 +55,7 @@ function wibar.get(s)
         },
         { -- Right widgets
             right,
+            right = 10,
             widget = wibox.container.margin
         }
     }

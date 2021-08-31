@@ -25,7 +25,7 @@ theme.tasklist_bg_normal = theme.bg_normal
 theme.tasklist_bg_focus = theme.bg_normal
 theme.tasklist_bg_urgent = theme.bg_normal
 theme.tasklist_disable_icon = true
-theme.tasklist_plain_task_name = true
+theme.tasklist_plain_task_name = false
 
 theme.gap_single_client = true
 theme.useless_gap   = dpi(4)

@@ -127,10 +127,10 @@ screen.connect_signal("arrange", function (s)
     end
 
     local max = s.selected_tag.layout.name == "max"
-    -- local only_one = #s.tiled_clients == 1 -- use tiled_clients so that other floating windows don't affect the count
+    local only_one = #s.tiled_clients == 1 -- use tiled_clients so that other floating windows don't affect the count
     -- but iterate over clients instead of tiled_clients as tiled_clients doesn't include maximized windows
     for _, c in pairs(s.clients) do
-        if max and not c.floating or c.maximized then
+        if (max and only_one) and not c.floating or c.maximized then
             beautiful.gap_single_client  = false
             c.border_width = 0
         else
