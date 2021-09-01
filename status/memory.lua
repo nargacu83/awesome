@@ -1,6 +1,6 @@
 local awful = require("awful")
 
-local interval = 10
+local interval = 2
 
 awful.widget.watch("cat /proc/meminfo", interval, function(_, stdout)
     local mem_total = tonumber(stdout:match("MemTotal: *(%d*) kB"))
