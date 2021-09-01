@@ -21,34 +21,41 @@ M.globalkeys = gears.table.join(
 			end
 		end,
 	{ description = "restore minimized", group = "client" }),
-    
+
     -- Awesome
     awful.key({ modkey, "Control" }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
     awful.key({ modkey, "Control" }, "q", awesome.quit,
               {description = "quit awesome", group = "awesome"}),
-    
+
+
+    awful.key({ modkey,           }, "m",
+        function ()
+            client.focus.maximized = false
+        end ,
+        {description = "(un)maximize", group = "client"}),
+
     -- Focus window
     awful.key({ modkey,           }, "j", function () awful.client.focus.byidx(1) end,
               {description = "focus next by index", group = "client"}),
     awful.key({ modkey,           }, "k", function () awful.client.focus.byidx(-1) end,
               {description = "focus previous by index", group = "client"}),
-    
-    awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact(0.05)          end,
+
+    awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact(0.05) end,
               {description = "increase master width factor", group = "layout"}),
-    awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)          end,
+    awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05) end,
               {description = "decrease master width factor", group = "layout"}),
-    
+
     -- Swap window
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(1) end,
               {description = "swap with next client by index", group = "client"}),
     awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx(-1) end,
               {description = "swap with previous client by index", group = "client"}),
-    
+
     -- Next layout
     awful.key({ modkey,           }, "Tab", function () awful.layout.inc(1) end,
               {description = "select next", group = "layout"}),
-    
+
     -- Toggle floating on window
     awful.key({ modkey,           }, "f", awful.client.floating.toggle,
               {description = "toggle floating", group = "client"})

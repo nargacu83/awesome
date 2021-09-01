@@ -8,11 +8,13 @@ M = {
 	-- All clients will match this rule.
 	{ rule = { },
 		properties = {
+			keys = clientkeys,
 			border_width = beautiful.border_width,
 			border_color = beautiful.border_normal,
+			maximized_vertical = false,
+			maximized_horizontal = false,
 			focus = awful.client.focus.filter,
 			raise = true,
-			keys = clientkeys,
 			buttons = keys.clientbuttons,
 			screen = awful.screen.preferred,
 			placement = awful.placement.no_overlap+awful.placement.no_offscreen
@@ -76,7 +78,19 @@ M = {
 			"dialog"
 		}
 	}, properties = { titlebars_enabled = false } },
-
+	
+	{ rule_any = {
+		class = {
+			"Godot",
+			"Godot_Editor"
+		}
+	}, properties = {
+		keys = clientkeys,
+		maximized_vertical = false,
+		maximized_horizontal = false
+	} },
+	
+	-- Open programs on specific tags
 	{ rule_any = {
 		class = {
 			"freetube"
@@ -91,8 +105,8 @@ M = {
 	
 	{ rule_any = {
 		class = {
-			"discord",
-			"element"
+			"element",
+			"discord"
 		}
 	}, properties = { screen = 1, tag = "3" } },
 }

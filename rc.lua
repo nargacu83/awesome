@@ -45,7 +45,7 @@ do
 end
 -- }}}
 
--- Set locale
+-- Get the system locale and apply it to awesome
 os.setlocale(os.getenv("LANG"))
 
 -- {{{ Variable definitions
