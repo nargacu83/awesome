@@ -79,17 +79,6 @@ M = {
 		}
 	}, properties = { titlebars_enabled = false } },
 	
-	{ rule_any = {
-		class = {
-			"Godot",
-			"Godot_Editor"
-		}
-	}, properties = {
-		keys = clientkeys,
-		maximized_vertical = false,
-		maximized_horizontal = false
-	} },
-	
 	-- Open programs on specific tags
 	{ rule_any = {
 		class = {

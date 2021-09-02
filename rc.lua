@@ -37,7 +37,7 @@ do
         -- Make sure we don't go into an endless error loop
         if in_error then return end
         in_error = true
-        
+
         awful.spawn("notify-send \"Oops, an error happened!\" \"" .. tostring(err) .."\"")
 
         in_error = false
@@ -105,7 +105,6 @@ awful.rules.rules = require("rules")
 client.connect_signal("manage", function (c)
     -- Set the windows at the slave,
     -- i.e. put it at the end of others instead of setting it master.
-    -- if not awesome.startup then awful.client.setslave(c) end
 
     if awesome.startup
       and not c.size_hints.user_position
@@ -113,6 +112,16 @@ client.connect_signal("manage", function (c)
         -- Prevent clients from being unreachable after screen count changes.
         awful.placement.no_offscreen(c)
     end
+end)
+
+client.connect_signal("property::maximized", function(c)
+    if not c.maximized then return end
+    c.maximized = false
+end)
+
+client.connect_signal("property::minimized", function(c)
+    if not c.minimized then return end
+    c.minimized = false
 end)
 
 -- Enable sloppy focus, so that focus follows mouse.
@@ -147,6 +156,7 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 function change_client_state(state)
     client.focus.fullscreen = false
     client.focus.maximized = false
+    client.focus.minimized = false
     client.focus.ontop = false
     client.focus.floating = false
     if state == "floating" or state == "stacking" then

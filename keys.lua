@@ -125,6 +125,10 @@ M.clientbuttons = gears.table.join(
                 c.floating_geometry = nil
                 c.floating = true
             end
+            c.fullscreen = false
+            c.maximized = false
+            c.maximized_horizontal = false
+            c.maximized_vertical = false
             awful.mouse.client.move(c)
         end
     ),
@@ -136,6 +140,10 @@ M.clientbuttons = gears.table.join(
                 c.floating_geometry = nil
                 c.floating = true
             end
+            c.fullscreen = false
+            c.maximized = false
+            c.maximized_horizontal = false
+            c.maximized_vertical = false
             awful.mouse.client.resize(c)
         end
     )
