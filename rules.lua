@@ -39,7 +39,7 @@ M = {
 			"Wpa_gui",
 			"veromix",
 			"xtightvncviewer",
-			"pavucontrol",
+			"Pavucontrol",
 			"origin.exe",
 			"file_progress",
 			"confirm",
@@ -82,7 +82,7 @@ M = {
 	-- Open programs on specific tags
 	{ rule_any = {
 		class = {
-			"freetube"
+          "FreeTube"
 		}
 	}, properties = { screen = 1, tag = "1" } },
 	
