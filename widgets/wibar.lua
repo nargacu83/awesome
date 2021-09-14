@@ -11,7 +11,7 @@ local mytaglist = require("widgets.taglist")
 local mytasklist = require("widgets.tasklist")
 local mysystray = require("widgets.systray")
 local mymemory = require("widgets.memory")
--- local myarchupdates = require("widgets.archupdates")
+local myarchupdates = require("widgets.archupdates")
 local mytextclock = require("widgets.textclock")
 local mytextclockhour = require("widgets.textclockhour")
 
@@ -38,7 +38,7 @@ function wibar.get(s)
         layout = wibox.layout.fixed.horizontal,
         mysystray,
         mymemory,
-        -- myarchupdates,
+        myarchupdates,
         mytextclock,
         mytextclockhour,
         spacing = 10

@@ -37,7 +37,7 @@ theme.border_marked = "#ff5555"
 theme.menu_height = dpi(15)
 theme.menu_width  = dpi(100)
 
-theme.wallpaper = "~/.config/wallpaper/background.png"
+-- theme.wallpaper = "~/.config/wallpaper/background.jpg"
 theme.icon_theme = nil
 
 return theme
