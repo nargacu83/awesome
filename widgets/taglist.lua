@@ -6,7 +6,8 @@ local dpi = xresources.apply_dpi
 
 local taglist = {}
 
-local taglist_padding = 12
+local tag_width = 30
+local tag_height = 6
 
 local taglist_buttons = gears.table.join(
     awful.button({ }, 1, function(t) t:view_only() end),
@@ -31,17 +32,15 @@ function taglist.get(s)
         screen  = s,
         filter  = awful.widget.taglist.filter.all,
         widget_template = {
-            {
-                {
-                    id = 'text_role',
-                    widget = wibox.widget.textbox
-                },
-                left = dpi(taglist_padding),
-                right = dpi(taglist_padding),
-                widget = wibox.container.margin
-            },
             id = 'background_role',
-            widget = wibox.container.background
+            widget = wibox.container.background,
+            {
+                widget = wibox.container.margin,
+                top = dpi(tag_height/2),
+                bottom = dpi(tag_height/2),
+                left = dpi(tag_width/2),
+                right = dpi(tag_width/2)
+            }
         },
         buttons = taglist_buttons
     }

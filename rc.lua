@@ -73,23 +73,23 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- Keyboard map indicator and switcher
 mykeyboardlayout = awful.widget.keyboardlayout()
 
-local function set_wallpaper(s)
-    -- Wallpaper
-    if beautiful.wallpaper then
-        local wallpaper = beautiful.wallpaper
-        -- If wallpaper is a function, call it with the screen
-        if type(wallpaper) == "function" then
-            wallpaper = wallpaper(s)
-        end
-        gears.wallpaper.maximized(wallpaper, s, true)
-    end
-end
--- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
-screen.connect_signal("property::geometry", set_wallpaper)
+-- local function set_wallpaper(s)
+--     -- Wallpaper
+--     if beautiful.wallpaper then
+--         local wallpaper = beautiful.wallpaper
+--         -- If wallpaper is a function, call it with the screen
+--         if type(wallpaper) == "function" then
+--             wallpaper = wallpaper(s)
+--         end
+--         gears.wallpaper.maximized(wallpaper, s, true)
+--     end
+-- end
+-- -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
+-- screen.connect_signal("property::geometry", set_wallpaper)
 
 awful.screen.connect_for_each_screen(function(s)
-    -- Wallpaper
-    set_wallpaper(s)
+    -- -- Wallpaper
+    -- set_wallpaper(s)
 
     -- Each screen has its own tag table.
     awful.tag({ "1", "2", "3", "4" }, s, awful.layout.layouts[1])
@@ -124,6 +124,18 @@ client.connect_signal("property::minimized", function(c)
     c.minimized = false
 end)
 
+client.connect_signal("property::floating", function(c)
+    if c.fullscreen then return end
+    if c.floating then
+        c.ontop = true
+    else
+        c.ontop = false
+    end
+end)
+
+-- client.connect_signal("property::fullscreen", function(c)
+--     awful.spawn("notify-send \"Oops, an error happened!\" \"" .. tostring(err) .."\"")
+-- end)
 -- Enable sloppy focus, so that focus follows mouse.
 -- client.connect_signal("mouse::enter", function(c)
 --     c:emit_signal("request::activate", "mouse_enter", {raise = false})
@@ -154,11 +166,6 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- }}}
 
 function change_client_state(state)
-    client.focus.fullscreen = false
-    client.focus.maximized = false
-    client.focus.minimized = false
-    client.focus.ontop = false
-    client.focus.floating = false
     if state == "floating" or state == "stacking" then
         client.focus.floating = true
         client.focus.ontop = true
@@ -169,10 +176,15 @@ function change_client_state(state)
         client.focus.ontop = true
         client.focus.fullscreen = true
     end
+    client.focus.fullscreen = false
+    client.focus.ontop = false
+    client.focus.maximized = false
+    client.focus.minimized = false
+    client.focus.floating = false
 end
 
 --- Autostart
-awful.spawn.with_shell("~/.config/autostart/autostart.sh")
+awful.spawn.with_shell("~/.config/awesome/autostart.sh")
 
 -- Run garbage collector regularly to prevent memory leaks
 gears.timer {

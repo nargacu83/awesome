@@ -13,7 +13,6 @@ local mysystray = require("widgets.systray")
 local mymemory = require("widgets.memory")
 local myarchupdates = require("widgets.archupdates")
 local mytextclock = require("widgets.textclock")
-local mytextclockhour = require("widgets.textclockhour")
 
 local wibar = {}
 
@@ -26,40 +25,80 @@ function wibar.get(s)
 
     local taglist = mytaglist.get(s)
     local tasklist = mytasklist.get(s)
-    
-    local left = {
-        layout = wibox.layout.fixed.horizontal,
-        taglist,
-        tasklist,
-        spacing = 10
-    }
-
-    local right = {
-        layout = wibox.layout.fixed.horizontal,
-        mysystray,
-        mymemory,
-        myarchupdates,
-        mytextclock,
-        mytextclockhour,
-        spacing = 10
-    }
 
     -- Add widgets to the wibox
     mywibox:setup {
         layout = wibox.layout.align.horizontal,
+        expand = "none",
         { -- Left widgets
-            left,
-            widget = wibox.container.margin
+            widget = wibox.container.margin,
+            left = 10,
+
+            tasklist,
         },
         { -- Middle widgets
-            layout = wibox.layout.align.horizontal
+            widget = wibox.container.place,
+            content_fill_vertical = true,
+            {
+                widget = wibox.container.margin,
+                layout = wibox.layout.stack,
+                mytextclock,
+                {
+                    widget = wibox.container.place,
+                    valign = "bottom",
+                    forced_height = taglist.tag_height,
+                    taglist
+                },
+            }
         },
         { -- Right widgets
-            right,
-            right = 10,
-            widget = wibox.container.margin
+            widget = wibox.container.place,
+            h_align = "right",
+            {
+                widget = wibox.container.margin,
+                right = 10,
+                {
+                    widget = wibox.container.place,
+                    layout = wibox.layout.fixed.horizontal,
+                    spacing = 10,
+
+                    mymemory,
+                    -- myarchupdates,
+                    mysystray,
+                }
+            }
         }
     }
+    -- mywibox:setup {
+    --     layout = wibox.layout.align.horizontal,
+    --     expand = "outside",
+    --     { -- Left widgets
+    --         widget = wibox.container.margin,
+    --         layout = wibox.layout.fixed.horizontal,
+    --         spacing = 8,
+
+    --         tasklist,
+    --         left = 10,
+    --     },
+    --     { -- Middle widgets
+    --         widget = wibox.container.margin,
+    --         layout = wibox.container.place,
+    --         fill_horizontal = true,
+
+    --         mytextclock,
+    --         taglist
+    --     },
+    --     { -- Right widgets
+    --         widget = wibox.container.margin,
+    --         layout = wibox.layout.fixed.horizontal,
+    --         right = 10,
+    --         spacing = 8,
+
+    --         mymemory,
+    --         -- myarchupdates,
+    --         mysystray,
+    --     }
+    -- }
 
     return mywibox
 end

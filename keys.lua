@@ -8,7 +8,7 @@ modkey = "Mod4"
 
 -- {{{ Key bindings
 M.globalkeys = gears.table.join(
-	awful.key({ modkey,           }, "w", function () if client.focus == nil then return end client.focus:kill() end,
+	awful.key({ modkey,           }, "q", function () if client.focus == nil then return end client.focus:kill() end,
               {description = "close", group = "client"}),
 	awful.key({ modkey }, "r",
 		function ()
@@ -25,8 +25,8 @@ M.globalkeys = gears.table.join(
     -- Awesome
     awful.key({ modkey, "Control" }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
-    awful.key({ modkey, "Control" }, "q", awesome.quit,
-              {description = "quit awesome", group = "awesome"}),
+    -- awful.key({ modkey, "Control" }, "q", awesome.quit,
+    --           {description = "quit awesome", group = "awesome"}),
 
 
     awful.key({ modkey,           }, "m",

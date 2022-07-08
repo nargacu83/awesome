@@ -80,21 +80,22 @@ M = {
 	}, properties = { titlebars_enabled = false } },
 	
 	-- Open programs on specific tags
-	{ rule_any = {
-		class = {
-          "FreeTube"
-		}
-	}, properties = { screen = 1, tag = "1" } },
+	-- { rule_any = {
+	-- 	class = {
+    --       "FreeTube"
+	-- 	}
+	-- }, properties = { screen = 1, tag = "1" } },
 	
 	{ rule_any = {
 		class = {
-			"vscodium", "jetbrains-rider", "unityhub", "Unity"
+			"emacs", "vscodium", "jetbrains-rider", "unityhub", "Unity"
 		}
 	}, properties = { screen = 1, tag = "2" } },
 	
 	{ rule_any = {
 		class = {
 			"element",
+            "revolt-desktop",
 			"discord"
 		}
 	}, properties = { screen = 1, tag = "3" } },
