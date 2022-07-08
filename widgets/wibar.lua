@@ -69,36 +69,6 @@ function wibar.get(s)
             }
         }
     }
-    -- mywibox:setup {
-    --     layout = wibox.layout.align.horizontal,
-    --     expand = "outside",
-    --     { -- Left widgets
-    --         widget = wibox.container.margin,
-    --         layout = wibox.layout.fixed.horizontal,
-    --         spacing = 8,
-
-    --         tasklist,
-    --         left = 10,
-    --     },
-    --     { -- Middle widgets
-    --         widget = wibox.container.margin,
-    --         layout = wibox.container.place,
-    --         fill_horizontal = true,
-
-    --         mytextclock,
-    --         taglist
-    --     },
-    --     { -- Right widgets
-    --         widget = wibox.container.margin,
-    --         layout = wibox.layout.fixed.horizontal,
-    --         right = 10,
-    --         spacing = 8,
-
-    --         mymemory,
-    --         -- myarchupdates,
-    --         mysystray,
-    --     }
-    -- }
 
     return mywibox
 end

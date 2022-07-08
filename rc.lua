@@ -73,24 +73,7 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- Keyboard map indicator and switcher
 mykeyboardlayout = awful.widget.keyboardlayout()
 
--- local function set_wallpaper(s)
---     -- Wallpaper
---     if beautiful.wallpaper then
---         local wallpaper = beautiful.wallpaper
---         -- If wallpaper is a function, call it with the screen
---         if type(wallpaper) == "function" then
---             wallpaper = wallpaper(s)
---         end
---         gears.wallpaper.maximized(wallpaper, s, true)
---     end
--- end
--- -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
--- screen.connect_signal("property::geometry", set_wallpaper)
-
 awful.screen.connect_for_each_screen(function(s)
-    -- -- Wallpaper
-    -- set_wallpaper(s)
-
     -- Each screen has its own tag table.
     awful.tag({ "1", "2", "3", "4" }, s, awful.layout.layouts[1])
 
@@ -133,39 +116,39 @@ client.connect_signal("property::floating", function(c)
     end
 end)
 
--- client.connect_signal("property::fullscreen", function(c)
---     awful.spawn("notify-send \"Oops, an error happened!\" \"" .. tostring(err) .."\"")
--- end)
+tag.connect_signal("property::layout", function(t)
+    if t.layout.name == "max" then
+        for _, c in pairs(t.screen.clients) do
+            if not c.floating or c.maximized then
+                c.border_width = 0
+                beautiful.gap_single_client  = false
+            end
+        end
+    else
+        for _, c in pairs(t.screen.clients) do
+            if not c.floating or c.maximized then
+                c.border_width = beautiful.border_width
+                beautiful.gap_single_client  = true
+            end
+        end
+    end
+end)
+
 -- Enable sloppy focus, so that focus follows mouse.
 -- client.connect_signal("mouse::enter", function(c)
 --     c:emit_signal("request::activate", "mouse_enter", {raise = false})
 -- end)
-
--- Do max layout without borders and gaps
-screen.connect_signal("arrange", function (s)
-    if s.selected_tag == nil then
-        return
-    end
-
-    local max = s.selected_tag.layout.name == "max"
-    local only_one = #s.tiled_clients == 1 -- use tiled_clients so that other floating windows don't affect the count
-    -- but iterate over clients instead of tiled_clients as tiled_clients doesn't include maximized windows
-    for _, c in pairs(s.clients) do
-        if max and not c.floating or c.maximized then
-            beautiful.gap_single_client  = false
-            c.border_width = 0
-        else
-            beautiful.gap_single_client  = true
-            c.border_width = beautiful.border_width
-        end
-    end
-end)
 
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus c:raise() end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 
 function change_client_state(state)
+    client.focus.ontop = false
+    client.focus.fullscreen = false
+    client.focus.maximized = false
+    client.focus.minimized = false
+    client.focus.floating = false
     if state == "floating" or state == "stacking" then
         client.focus.floating = true
         client.focus.ontop = true
@@ -173,14 +156,9 @@ function change_client_state(state)
         client.focus.maximized = true
         client.focus.ontop = true
     elseif state == "fullscreen" then
-        client.focus.ontop = true
         client.focus.fullscreen = true
+        client.focus.ontop = true
     end
-    client.focus.fullscreen = false
-    client.focus.ontop = false
-    client.focus.maximized = false
-    client.focus.minimized = false
-    client.focus.floating = false
 end
 
 --- Autostart
