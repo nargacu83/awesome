@@ -63,7 +63,7 @@ function wibar.get(s)
                     spacing = 10,
 
                     mymemory,
-                    -- myarchupdates,
+                    myarchupdates,
                     mysystray,
                 }
             }
