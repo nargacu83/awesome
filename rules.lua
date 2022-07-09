@@ -88,12 +88,6 @@ M = {
 	
 	{ rule_any = {
 		class = {
-			"emacs", "vscodium", "jetbrains-rider", "unityhub", "Unity"
-		}
-	}, properties = { screen = 1, tag = "2" } },
-	
-	{ rule_any = {
-		class = {
 			"element",
             "revolt-desktop",
 			"discord"
