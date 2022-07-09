@@ -29,12 +29,6 @@ M.globalkeys = gears.table.join(
     --           {description = "quit awesome", group = "awesome"}),
 
 
-    awful.key({ modkey,           }, "m",
-        function ()
-            client.focus.maximized = false
-        end ,
-        {description = "(un)maximize", group = "client"}),
-
     -- Focus window
     awful.key({ modkey,           }, "j", function () awful.client.focus.byidx(1) end,
               {description = "focus next by index", group = "client"}),
@@ -113,6 +107,16 @@ end
 
 M.clientbuttons = gears.table.join(
     awful.button({}, 1,
+        function(c)
+            c:emit_signal("request::activate", "mouse_click", {raise = true})
+        end
+    ),
+    awful.button({}, 2,
+        function(c)
+            c:emit_signal("request::activate", "mouse_click", {raise = true})
+        end
+    ),
+    awful.button({}, 3,
         function(c)
             c:emit_signal("request::activate", "mouse_click", {raise = true})
         end
