@@ -57,6 +57,7 @@ beautiful.init(theme_path)
 terminal = "alacritty"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
+current_tag = nil
 
 -- Layouts.
 awful.layout.layouts = {
@@ -86,9 +87,13 @@ awful.rules.rules = require("rules")
 -- {{{ Signals
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function (c)
+    -- Update gaps
+    if current_tag and not c.floating then
+        update_client_gaps(c)
+    end
+
     -- Set the windows at the slave,
     -- i.e. put it at the end of others instead of setting it master.
-
     if awesome.startup
       and not c.size_hints.user_position
       and not c.size_hints.program_position then
@@ -114,6 +119,9 @@ client.connect_signal("property::floating", function(c)
     else
         c.ontop = false
     end
+    if current_tag then
+        update_client_gaps(c)
+    end
 end)
 
 tag.connect_signal("property::layout", function(t)
@@ -121,6 +129,7 @@ tag.connect_signal("property::layout", function(t)
 end)
 
 tag.connect_signal("property::selected", function(t)
+    current_tag = t
     update_clients_gaps(t)
 end)
 
@@ -133,30 +142,48 @@ client.connect_signal("focus", function(c) c.border_color = beautiful.border_foc
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 
+function update_client_gaps(c)
+    if c == nil then return end
+
+    is_max = current_tag.layout.name == "max"
+    beautiful.gap_single_client = not is_max
+    border_width = beautiful.border_width
+
+    if not c.floating and is_max then
+        border_width = 0
+    end
+
+    if not c.fullscreen or c.maximized then
+        c.border_width = border_width
+    end
+end
+
 function update_clients_gaps(t)
-    if t.layout.name == "max" then
-        for _, c in pairs(t.screen.clients) do
-            if not c.floating or c.maximized then
-                c.border_width = 0
-                beautiful.gap_single_client  = false
-            end
-        end
-    else
-        for _, c in pairs(t.screen.clients) do
-            if not c.floating or c.maximized then
-                c.border_width = beautiful.border_width
-                beautiful.gap_single_client  = true
-            end
+    if t == nil then return end
+
+    is_max = t.layout.name == "max"
+    beautiful.gap_single_client = not is_max
+    border_width = beautiful.border_width
+
+    if is_max then
+        border_width = 0
+    end
+
+    for _, c in pairs(t.screen.clients) do
+        if not c.fullscreen or c.maximized then
+            c.border_width = border_width
         end
     end
 end
 
+-- Force
 function change_client_state(state)
     client.focus.ontop = false
     client.focus.fullscreen = false
     client.focus.maximized = false
     client.focus.minimized = false
     client.focus.floating = false
+
     if state == "floating" or state == "stacking" then
         client.focus.floating = true
         client.focus.ontop = true
