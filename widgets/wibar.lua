@@ -60,7 +60,7 @@ function wibar.get(s)
                 {
                     widget = wibox.container.place,
                     layout = wibox.layout.fixed.horizontal,
-                    spacing = 10,
+                    spacing = 5,
 
                     mymemory,
                     myarchupdates,
