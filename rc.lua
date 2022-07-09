@@ -77,7 +77,7 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 awful.screen.connect_for_each_screen(function(s)
     -- Each screen has its own tag table.
     awful.tag({ "1", "2", "3", "4" }, s, awful.layout.layouts[1])
-
+    current_tag = s.selected_tag
     wibar.get(s)
 end)
 
@@ -149,7 +149,6 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 
 function update_client_gaps(c)
     if c == nil then return end
-
     is_max = current_tag.layout.name == "max"
     beautiful.gap_single_client = not is_max
     border_width = beautiful.border_width
