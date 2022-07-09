@@ -87,7 +87,7 @@ awful.rules.rules = require("rules")
 -- {{{ Signals
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function (c)
-    -- Update gaps
+    -- Update gaps of this client
     if current_tag and not c.floating then
         update_client_gaps(c)
     end
@@ -103,11 +103,13 @@ client.connect_signal("manage", function (c)
 end)
 
 client.connect_signal("property::maximized", function(c)
+    -- Prevent client to be maximized
     if not c.maximized then return end
     c.maximized = false
 end)
 
 client.connect_signal("property::minimized", function(c)
+    -- Prevent client to be minimized
     if not c.minimized then return end
     c.minimized = false
 end)
@@ -119,17 +121,20 @@ client.connect_signal("property::floating", function(c)
     else
         c.ontop = false
     end
+    -- Update borders of this client
     if current_tag then
         update_client_gaps(c)
     end
 end)
 
 tag.connect_signal("property::layout", function(t)
+    -- Update clients gaps and borders when the layout changes
     update_clients_gaps(t)
 end)
 
 tag.connect_signal("property::selected", function(t)
     current_tag = t
+    -- Update clients gaps and borders when changed tag
     update_clients_gaps(t)
 end)
 
@@ -149,10 +154,12 @@ function update_client_gaps(c)
     beautiful.gap_single_client = not is_max
     border_width = beautiful.border_width
 
+    -- Define width to zero if it's not floating and is in the max layout
     if not c.floating and is_max then
         border_width = 0
     end
 
+    -- Set borders width for this client if it's not fullscreen or maximized
     if not c.fullscreen or c.maximized then
         c.border_width = border_width
     end
@@ -165,6 +172,7 @@ function update_clients_gaps(t)
     beautiful.gap_single_client = not is_max
     border_width = beautiful.border_width
 
+    -- Define width to zero if it is in the max layout
     if is_max then
         border_width = 0
     end
@@ -176,7 +184,6 @@ function update_clients_gaps(t)
     end
 end
 
--- Force
 function change_client_state(state)
     client.focus.ontop = false
     client.focus.fullscreen = false
