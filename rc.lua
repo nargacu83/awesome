@@ -117,6 +117,23 @@ client.connect_signal("property::floating", function(c)
 end)
 
 tag.connect_signal("property::layout", function(t)
+    update_clients_gaps(t)
+end)
+
+tag.connect_signal("property::selected", function(t)
+    update_clients_gaps(t)
+end)
+
+-- Enable sloppy focus, so that focus follows mouse.
+-- client.connect_signal("mouse::enter", function(c)
+--     c:emit_signal("request::activate", "mouse_enter", {raise = false})
+-- end)
+
+client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus c:raise() end)
+client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+-- }}}
+
+function update_clients_gaps(t)
     if t.layout.name == "max" then
         for _, c in pairs(t.screen.clients) do
             if not c.floating or c.maximized then
@@ -132,16 +149,7 @@ tag.connect_signal("property::layout", function(t)
             end
         end
     end
-end)
-
--- Enable sloppy focus, so that focus follows mouse.
--- client.connect_signal("mouse::enter", function(c)
---     c:emit_signal("request::activate", "mouse_enter", {raise = false})
--- end)
-
-client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus c:raise() end)
-client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
--- }}}
+end
 
 function change_client_state(state)
     client.focus.ontop = false
