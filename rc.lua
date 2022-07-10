@@ -77,6 +77,7 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 awful.screen.connect_for_each_screen(function(s)
     -- Each screen has its own tag table.
     awful.tag({ "1", "2", "3", "4" }, s, awful.layout.layouts[1])
+    -- Get the current tag in case it's not defined
     current_tag = s.selected_tag
     wibar.get(s)
 end)
@@ -91,7 +92,6 @@ client.connect_signal("manage", function (c)
     if current_tag and not c.floating then
         update_client_gaps(c)
     end
-
     -- Set the windows at the slave,
     -- i.e. put it at the end of others instead of setting it master.
     if awesome.startup
@@ -112,6 +112,20 @@ client.connect_signal("property::minimized", function(c)
     -- Prevent client to be minimized
     if not c.minimized then return end
     c.minimized = false
+end)
+
+-- client.connect_signal("property::fullscreen", function(c)
+--     notify(c.name, "fullscreen: " .. tostring(c.fullscreen))
+-- end)
+
+client.connect_signal("property::fullscreen", function(c)
+    if c.fullscreen then
+        gears.timer.delayed_call(function()
+            if c.valid then
+                c:geometry(c.screen.geometry)
+            end
+        end)
+    end
 end)
 
 client.connect_signal("property::floating", function(c)
