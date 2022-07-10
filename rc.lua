@@ -114,11 +114,8 @@ client.connect_signal("property::minimized", function(c)
     c.minimized = false
 end)
 
--- client.connect_signal("property::fullscreen", function(c)
---     notify(c.name, "fullscreen: " .. tostring(c.fullscreen))
--- end)
-
 client.connect_signal("property::fullscreen", function(c)
+    -- Fixes fullscreen not being entirely fullscreen
     if c.fullscreen then
         gears.timer.delayed_call(function()
             if c.valid then
