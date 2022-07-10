@@ -14,7 +14,7 @@ theme.bg_urgent     = "#ffffff"
 theme.bg_occupied   = "#282a36"
 theme.bg_minimize   = "#282a36"
 theme.bg_systray    = theme.bg_normal
-theme.systray_icon_spacing = 8
+theme.systray_icon_spacing = 5
 
 theme.fg_normal     = "#f8f8f2"
 theme.fg_focus      = "#ffffff"
