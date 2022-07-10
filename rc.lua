@@ -138,14 +138,8 @@ tag.connect_signal("property::selected", function(t)
     update_clients_gaps(t)
 end)
 
--- Enable sloppy focus, so that focus follows mouse.
--- client.connect_signal("mouse::enter", function(c)
---     c:emit_signal("request::activate", "mouse_enter", {raise = false})
--- end)
-
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus c:raise() end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
--- }}}
 
 function update_client_gaps(c)
     if c == nil then return end
@@ -180,25 +174,6 @@ function update_clients_gaps(t)
         if not c.fullscreen or c.maximized then
             c.border_width = border_width
         end
-    end
-end
-
-function change_client_state(state)
-    client.focus.ontop = false
-    client.focus.fullscreen = false
-    client.focus.maximized = false
-    client.focus.minimized = false
-    client.focus.floating = false
-
-    if state == "floating" or state == "stacking" then
-        client.focus.floating = true
-        client.focus.ontop = true
-    elseif state == "maximized" then
-        client.focus.maximized = true
-        client.focus.ontop = true
-    elseif state == "fullscreen" then
-        client.focus.fullscreen = true
-        client.focus.ontop = true
     end
 end
 
