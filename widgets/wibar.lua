@@ -32,7 +32,7 @@ function wibar.get(s)
         expand = "none",
         { -- Left widgets
             widget = wibox.container.margin,
-            left = 10,
+            left = 5,
 
             tasklist,
         },
@@ -56,7 +56,7 @@ function wibar.get(s)
             h_align = "right",
             {
                 widget = wibox.container.margin,
-                right = 10,
+                right = 5,
                 {
                     widget = wibox.container.place,
                     layout = wibox.layout.fixed.horizontal,
