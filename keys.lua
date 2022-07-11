@@ -106,17 +106,31 @@ for i = 1, 9 do
 end
 
 M.clientbuttons = gears.table.join(
+    -- Mouse left button
     awful.button({}, 1,
         function(c)
             c:emit_signal("request::activate", "mouse_click", {raise = true})
         end
     ),
+    -- Mouse middle button
     awful.button({}, 2,
         function(c)
             c:emit_signal("request::activate", "mouse_click", {raise = true})
         end
     ),
+    -- Mouse right button
     awful.button({}, 3,
+        function(c)
+            c:emit_signal("request::activate", "mouse_click", {raise = true})
+        end
+    ),
+    -- Mouse wheel
+    awful.button({}, 4,
+        function(c)
+            c:emit_signal("request::activate", "mouse_click", {raise = true})
+        end
+    ),
+    awful.button({}, 5,
         function(c)
             c:emit_signal("request::activate", "mouse_click", {raise = true})
         end
