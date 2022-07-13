@@ -79,7 +79,7 @@ awful.screen.connect_for_each_screen(function(s)
     awful.tag({ "1", "2", "3", "4" }, s, awful.layout.layouts[1])
     -- Get the current tag in case it's not defined
     current_tag = s.selected_tag
-    wibar.get(s)
+    s.wibar = wibar.get(s)
 end)
 
 root.keys(keys.globalkeys)

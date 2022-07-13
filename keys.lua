@@ -28,6 +28,13 @@ M.globalkeys = gears.table.join(
     -- awful.key({ modkey, "Control" }, "q", awesome.quit,
     --           {description = "quit awesome", group = "awesome"}),
 
+    -- Toggle bar
+    awful.key({ modkey,           }, "b",
+        function ()
+            myscreen = awful.screen.focused()
+            myscreen.wibar.visible = not screen.wibar.visible
+        end,
+    {description = "Toggle wibar", group = "layout"}),
 
     -- Focus window
     awful.key({ modkey,           }, "j", function () awful.client.focus.byidx(1) end,
