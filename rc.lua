@@ -97,6 +97,12 @@ client.connect_signal("manage", function (c)
     end
 end)
 
+client.connect_signal("property::minimized", function(c)
+    -- Prevent client to be minimized
+    if not c.minimized then return end
+    c.minimized = false
+end)
+
 client.connect_signal("property::fullscreen", function(c)
     -- Fixes fullscreen not being entirely fullscreen
     if c.fullscreen then
