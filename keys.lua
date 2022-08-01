@@ -131,17 +131,6 @@ M.clientbuttons = gears.table.join(
             c:emit_signal("request::activate", "mouse_click", {raise = true})
         end
     ),
-    -- Mouse wheel
-    awful.button({}, 4,
-        function(c)
-            c:emit_signal("request::activate", "mouse_click", {raise = true})
-        end
-    ),
-    awful.button({}, 5,
-        function(c)
-            c:emit_signal("request::activate", "mouse_click", {raise = true})
-        end
-    ),
     awful.button({modkey}, 1,
         function(c)
             c:emit_signal("request::activate", "mouse_click", {raise = true})
