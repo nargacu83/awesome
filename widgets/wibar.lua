@@ -3,16 +3,17 @@ local wibox = require("wibox")
 local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
 
-local widget_padding = 8
+-- local widget_padding = 8
 local wibar_height = 35
 
 -- Widget imports
 local mytaglist = require("widgets.taglist")
-local mytasklist = require("widgets.tasklist")
+-- local mytasklist = require("widgets.tasklist")
 local mysystray = require("widgets.systray")
 local mymemory = require("widgets.memory")
 local myarchupdates = require("widgets.archupdates")
-local mytextclock = require("widgets.textclock")
+local myhourclock = require("widgets.hourclock")
+local mydateclock = require("widgets.dateclock")
 
 local wibar = {}
 
@@ -24,32 +25,31 @@ function wibar.get(s)
     })
 
     local taglist = mytaglist.get(s)
-    local tasklist = mytasklist.get(s)
 
     -- Add widgets to the wibox
     mywibox:setup {
         layout = wibox.layout.align.horizontal,
         expand = "none",
+
         { -- Left widgets
             widget = wibox.container.margin,
             left = 5,
+            {
+                widget = wibox.container.place,
+                layout = wibox.layout.fixed.horizontal,
+                spacing = 5,
 
-            tasklist,
+                mydateclock,
+                myhourclock,
+            },
         },
         { -- Middle widgets
-            widget = wibox.container.place,
-            content_fill_vertical = true,
-            {
-                widget = wibox.container.margin,
-                layout = wibox.layout.stack,
-                mytextclock,
-                {
-                    widget = wibox.container.place,
-                    valign = "bottom",
-                    forced_height = taglist.tag_height,
-                    taglist
-                },
-            }
+            widget = wibox.container.margin,
+            -- left = 5,
+            -- right = 5,
+            top = 10,
+            bottom = 10,
+            taglist
         },
         { -- Right widgets
             widget = wibox.container.place,

@@ -1,17 +1,21 @@
 local gears = require("gears")
 local wibox = require("wibox")
-local xresources = require("beautiful.xresources")
-local dpi = xresources.apply_dpi
 
-local bg_shape = function (cr, w, h) gears.shape.rounded_rect(cr, w, h, 3) end
-local systray = {
-    widget = wibox.container.margin,
-    top = dpi(2),
-    bottom = dpi(2),
-    wibox.widget.systray(),
+local icon = {
+    widget = wibox.container.place,
+    {
+        widget = wibox.widget.imagebox,
+        image = os.getenv("HOME") .. "/.config/awesome/theme/icons/clock.svg",
+        forced_width = 15,
+        resize = true,
+    },
 }
-
-local widget = {
+local hour = {
+    widget = wibox.widget.textclock,
+    format = "%H:%M",
+}
+local bg_shape = function (cr, w, h) gears.shape.rounded_rect(cr, w, h, 3) end
+local hourclock = {
     widget = wibox.container.margin,
     top = 6,
     bottom = 6,
@@ -30,10 +34,11 @@ local widget = {
                 layout = wibox.layout.fixed.horizontal,
                 spacing = 5,
 
-                systray,
+                icon,
+                hour,
             }
         },
     },
 }
 
-return widget
+return hourclock

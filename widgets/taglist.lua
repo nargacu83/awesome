@@ -8,6 +8,7 @@ local taglist = {}
 
 local tag_width = 30
 local tag_height = 6
+local tag_shape = function (cr, w, h) gears.shape.rounded_rect(cr, w, h, 3) end
 
 local taglist_buttons = gears.table.join(
     awful.button({ }, 1, function(t) t:view_only() end),
@@ -26,21 +27,23 @@ local taglist_buttons = gears.table.join(
     awful.button({ }, 5, function(t) awful.tag.viewprev(t.screen) end)
 )
 
-
 function taglist.get(s)
     local widget = awful.widget.taglist {
-        screen  = s,
-        filter  = awful.widget.taglist.filter.all,
+        screen = s,
+        filter = awful.widget.taglist.filter.all,
+        layout = {
+            spacing = 10,
+            layout  = wibox.layout.fixed.horizontal
+        },
+        style = {shape = tag_shape},
         widget_template = {
+            {
+                id = 'margin_role',
+                right = 15,
+                widget = wibox.container.margin
+            },
             id = 'background_role',
             widget = wibox.container.background,
-            {
-                widget = wibox.container.margin,
-                top = dpi(tag_height/2),
-                bottom = dpi(tag_height/2),
-                left = dpi(tag_width/2),
-                right = dpi(tag_width/2)
-            }
         },
         buttons = taglist_buttons
     }
