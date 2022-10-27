@@ -27,7 +27,7 @@ General:
 
 Bar:
 
-- Icons are from [Feather](https://feathericons.com/) I wanted to used real icon files, not icons in nerd fonts.
+- Icons are from [[https://feathericons.com/][Feather]] I wanted to used real icon files, not icons in nerd fonts.
 
 - Nothing too crazy for the rest. Made one "custom" widget for showing packages updates.
 
@@ -42,4 +42,4 @@ Known issues:
 
 
 
-Thanks to [dmun](https://github.com/dmun/awesome) for his configuration files i used as a base.
+Thanks to [[https://github.com/dmun/awesome][dmun]] for his configuration files i used as a base.
