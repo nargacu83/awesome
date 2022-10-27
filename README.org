@@ -1,0 +1,45 @@
+#+title: AwesomeWM configuration
+
+First "finished" configuration. It still needs some cleaning and small fixes but i'm happy with it.
+
+Here's a list of modified/added behaviour to AwesomeWM.
+
+General:
+
+- There are only four tags.
+
+- Floating windows are always on top
+
+- If a window wants to be minimized and maximized, nothing will happen.
+
+  Fixes "bugs" like Godot Engine wanting to be maximized every time you open it.
+
+- There are two layouts: Master stack and Monocle/Max.
+
+  Monocle/Max is used when i need to focus on the focus app.
+
+- Removes borders on non floating windows when the current layout is Monocle/Max.
+
+- Fix for fullscreen windows not being entirely fullscreen
+
+  If you are playing games on AwesomeWM, you know this fix.
+
+
+Bar:
+
+- Icons are from [Feather](https://feathericons.com/) I wanted to used real icon files, not icons in nerd fonts.
+
+- Nothing too crazy for the rest. Made one "custom" widget for showing packages updates.
+
+Known issues:
+
+- Apps stealing focus
+
+  Godot Engine: Currently in the beta of Godot Engine 4.0. The engine will steal the focus every time you open a new window or changes tag.
+
+  MS Teams: The first login window of the app will heavily steal the focus.
+
+
+
+
+Thanks to [dmun](https://github.com/dmun/awesome) for his configuration files i used as a base.
