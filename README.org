@@ -16,7 +16,7 @@ General:
 
 - There are two layouts: Master stack and Monocle/Max.
 
-  Monocle/Max is used when i need to focus on the focus app.
+  Monocle/Max is used when i need to focus on the focused app.
 
 - Removes borders on non floating windows when the current layout is Monocle/Max.
 
